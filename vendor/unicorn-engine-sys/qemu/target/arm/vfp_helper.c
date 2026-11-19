@@ -407,7 +407,7 @@ float32 VFP_HELPER(sqrt, s)(float32 a, CPUARMState *env)
 {
     if (likely(g_vfp_fastpath_enabled)) {
         float fa = u2f(a);
-        return f2u(__builtin_sqrtf(fa));
+        return f2u(sqrtf(fa));
     }
     return float32_sqrt(a, &env->vfp.fp_status);
 }
@@ -1363,7 +1363,7 @@ float32 VFP_HELPER(muladd, s)(float32 a, float32 b, float32 c, void *fpstp)
         float fa = u2f(a);
         float fb = u2f(b);
         float fc = u2f(c);
-        return f2u(__builtin_fmaf(fa, fb, fc));
+        return f2u(fmaf(fa, fb, fc));
     }
     float_status *fpst = fpstp;
     return float32_muladd(a, b, c, 0, fpst);
